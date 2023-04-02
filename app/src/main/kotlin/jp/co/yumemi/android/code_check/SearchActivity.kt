@@ -6,7 +6,7 @@ package jp.co.yumemi.android.code_check
 import androidx.appcompat.app.AppCompatActivity
 import java.util.*
 
-class SearchActivity : AppCompatActivity(R.layout.activity_top) {
+class SearchActivity : AppCompatActivity(R.layout.activity_search) {
 
     companion object {
         lateinit var lastSearchDate: Date
