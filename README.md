@@ -1,3 +1,24 @@
+# ブランチ運用規則
+## 今回採用するブランチ運用
+[GitFlow](https://nvie.com/posts/a-successful-git-branching-model/)
+
+[GitFlowの日本語訳](https://qiita.com/homhom44/items/9f13c646fa2619ae63d0)
+
+今回は、GitFlowという運用例を使います。
+## 命名規則について
+今回はIssueドリブン開発という開発方法を使います。
+ブランチの命名規則は以下のようにします。
+
+* feature/#Issue番号_動詞_追加する機能
+* スネークケースで記述する。
+
+開発方法については、[【メモ】Issueドリブン開発とブランチ命名規則ついて【Git】](https://qiita.com/takahirocook/items/6ac94e5dc6536bd2272c)を参考にします。
+> ### Issueドリブン開発の流れ
+> 以下は「Webサイトのメニューをハンバーガーメニューに変更したい」となった際の一例です。
+> 1. Github上で、やりたいことを記載したIssueを立てる。(issue番号は#1と仮定)発行されたIssue番号を使い、feature/#1replace_to_hamburger_menuというブランチを作成。
+> 2. 開発進める。開発完了したらdevelopブランチにマージコミット。
+> 3.  この際、close #12などとコミットメッセージに記述すると、自動的にIssueが閉じられるので、覚えておきましょう。
+
 # 株式会社ゆめみ Android エンジニアコードチェック課題
 
 ## 概要
