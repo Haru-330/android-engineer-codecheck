@@ -80,7 +80,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
 /**
  * diffUtil
- * @param T 型引数: item
+ * @param item
  * DiffUtilのItemCallbackクラスを継承して、二つのitemオブジェクトを比較し、アイテムが同じであるか、コンテンツが同じであるかを判定します。
  */
 val diffUtil = object : DiffUtil.ItemCallback<item>() {
@@ -96,7 +96,7 @@ val diffUtil = object : DiffUtil.ItemCallback<item>() {
 
 /**
  * CustomAdapter クラス
- * @param T 型引数: item
+ * @param item
  * RecyclerViewのListAdapterクラスを継承して、itemのリストを表示するためのカスタムアダプターです。
  * アイテムがクリックされたときに、OnItemClickListenerインターフェースのitemClickメソッドを呼び出します。
  */

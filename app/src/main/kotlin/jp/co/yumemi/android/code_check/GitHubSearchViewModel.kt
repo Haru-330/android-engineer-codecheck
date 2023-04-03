@@ -50,10 +50,7 @@ class GitHubSearchViewModel(
             val jsonItems = jsonBody.optJSONArray("items")!!
 
             val items = mutableListOf<item>()
-
-            /**
-             * アイテムの個数分ループする
-             */
+            
             for (i in 0 until jsonItems.length()) {
                 val jsonItem = jsonItems.optJSONObject(i)!!
                 val name = jsonItem.optString("full_name")
