@@ -1,4 +1,24 @@
-
+# コメントの書き方
+簡易的なKDocのような感じで書きます。
+@paramや@returnはわかりにくい時だけで良いです。
+基本的には、クラス名+説明、という感じです。
+## クラス
+```
+/**
+ * Hello クラス.
+ * @param T 型引数
+ * クラス内容の説明
+ */
+```
+## 関数
+```
+/**
+* メソッド.
+* @return 戻り値の説明
+* どのような処理内容かの説明
+*/
+```
+引用：[KDoc 書き方メモ(Kotlin のドキュメンテーションコメント)](https://qiita.com/opengl-8080/items/fe43adef48e6162e6166#%E3%83%91%E3%83%A9%E3%83%A1%E3%83%BC%E3%82%BF)
 
 # 命名規則
 今回の命名規則は、[このサイト](https://kotlinlang.org/docs/coding-conventions.html#source-code-organization)をGoogle翻訳により日本語化したものを参考にします。
