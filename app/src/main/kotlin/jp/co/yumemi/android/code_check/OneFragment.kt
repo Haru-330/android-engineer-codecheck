@@ -22,7 +22,7 @@ class OneFragment: Fragment(R.layout.fragment_one){
 
         val binding= FragmentOneBinding.bind(view)
 
-        val viewModel= GithubSearchViewModel(context!!)
+        val viewModel= OneViewModel(context!!)
 
         val layoutManager= LinearLayoutManager(context!!)
         val dividerItemDecoration=

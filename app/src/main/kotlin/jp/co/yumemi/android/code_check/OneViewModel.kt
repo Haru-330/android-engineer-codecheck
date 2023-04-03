@@ -22,7 +22,7 @@ import java.util.*
 /**
  * TwoFragment で使う
  */
-class GithubSearchViewModel(
+class OneViewModel(
     val context: Context
 ) : ViewModel() {
 
@@ -52,7 +52,7 @@ class GithubSearchViewModel(
                 val language = jsonItem.optString("language")
                 val stargazersCount = jsonItem.optLong("stargazers_count")
                 val watchersCount = jsonItem.optLong("watchers_count")
-                val forksCount = jsonItem.optLong("forks_count")
+                val forksCount = jsonItem.optLong("forks_conut")
                 val openIssuesCount = jsonItem.optLong("open_issues_count")
 
                 items.add(
