@@ -14,7 +14,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.*
 import jp.co.yumemi.android.code_check.databinding.FragmentOneBinding
 
-class SearchFragment: Fragment(R.layout.fragment_one){
+class OneFragment: Fragment(R.layout.fragment_one){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?)
     {
