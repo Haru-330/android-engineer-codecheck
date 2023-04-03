@@ -18,13 +18,24 @@ import org.json.JSONObject
 import java.util.*
 
 /**
- * TwoFragment で使う
+ * GitHubSearchViewModel クラス
+ * @param context Applicationのコンテキスト
+ * GitHubリポジトリを検索するためのViewModelクラスです。
+ * 検索キーワードを用いて、GitHub APIを呼び出し、該当するリポジトリの情報を取得します。
+ * 取得した情報をitemクラスのオブジェクトに変換し、リストに格納して返却します。
  */
 class GitHubSearchViewModel(
     val context: Context
 ) : ViewModel() {
 
-    // 検索結果
+    /**
+     * searchGithubRepositories
+     * @param inputText 検索キーワード
+     * @return 検索結果のリスト
+     * GitHubリポジトリを検索するメソッドです。
+     * 検索キーワードを用いて、GitHub APIを呼び出し、該当するリポジトリの情報を取得します。
+     * 取得した情報をitemクラスのオブジェクトに変換し、リストに格納して返却します。
+     */
     fun searchGithubRepositories(inputText: String): List<item> = runBlocking {
         val client = HttpClient(Android)
 

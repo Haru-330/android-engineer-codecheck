@@ -12,6 +12,10 @@ import coil.load
 import jp.co.yumemi.android.code_check.SearchActivity.Companion.lastSearchDate
 import jp.co.yumemi.android.code_check.databinding.FragmentRepositoryDetailBinding
 
+/**
+ * RepositoryDetailFragment クラス
+ * GitHub リポジトリの詳細を表示するためのフラグメントを実装するクラスです。
+ */
 class RepositoryDetailFragment : Fragment(R.layout.fragment_repository_detail) {
 
     private val args: RepositoryDetailFragmentArgs by navArgs()
@@ -19,6 +23,10 @@ class RepositoryDetailFragment : Fragment(R.layout.fragment_repository_detail) {
     private var binding: FragmentRepositoryDetailBinding? = null
     private val _binding get() = binding!!
 
+    /**
+     * onViewCreated メソッド
+     * フラグメントが作成され、関連付けられたビューが作成された後に呼び出され、詳細データを表示するための UI 要素を設定する処理を行うメソッドです。
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
