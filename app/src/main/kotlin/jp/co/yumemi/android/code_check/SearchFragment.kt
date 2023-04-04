@@ -38,26 +38,24 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         val viewModel = GitHubSearchViewModel(view.context)
 
         val layoutManager = LinearLayoutManager(view.context)
-        val dividerItemDecoration =
-            DividerItemDecoration(view.context, layoutManager.orientation)
+        val dividerItemDecoration = DividerItemDecoration(view.context, layoutManager.orientation)
         val adapter = CustomAdapter(object : CustomAdapter.OnItemClickListener {
             override fun itemClick(item: item) {
                 gotoRepositoryFragment(item)
             }
         })
 
-        binding.searchInputText
-            .setOnEditorActionListener { editText, action, _ ->
-                if (action == EditorInfo.IME_ACTION_SEARCH) {
-                    editText.text.toString().let {
-                        viewModel.searchGithubRepositories(it).apply {
-                            adapter.submitList(this)
-                        }
+        binding.searchInputText.setOnEditorActionListener { editText, action, _ ->
+            if (action == EditorInfo.IME_ACTION_SEARCH) {
+                editText.text.toString().let {
+                    viewModel.searchGithubRepositories(it).apply {
+                        adapter.submitList(this)
                     }
-                    return@setOnEditorActionListener true
                 }
-                return@setOnEditorActionListener false
+                return@setOnEditorActionListener true
             }
+            return@setOnEditorActionListener false
+        }
 
         binding.recyclerView.also {
             it.layoutManager = layoutManager
@@ -72,8 +70,8 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
      * アイテムをタップした際に呼び出され、選択されたアイテムに対応するリポジトリの詳細を表示する RepositoryDetailFragment に遷移します。
      */
     fun gotoRepositoryFragment(item: item) {
-        val action = SearchFragmentDirections
-            .actionRepositoriesFragmentToRepositoryFragment(item = item)
+        val action =
+            SearchFragmentDirections.actionRepositoriesFragmentToRepositoryFragment(item = item)
         findNavController().navigate(action)
     }
 }
@@ -126,8 +124,7 @@ class CustomAdapter(
      * 新しいViewHolderインスタンスを作成します。
      */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.layout_item, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.layout_item, parent, false)
         return ViewHolder(view)
     }
 
@@ -139,8 +136,7 @@ class CustomAdapter(
      */
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
-        (holder.itemView.findViewById<View>(R.id.repositoryNameView) as TextView).text =
-            item.name
+        holder.itemView.findViewById<TextView>(R.id.repositoryNameView).text = item.name
 
         holder.itemView.setOnClickListener {
             itemClickListener.itemClick(item)
