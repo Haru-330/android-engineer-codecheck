@@ -12,6 +12,6 @@ import java.util.*
  */
 class SearchActivity : AppCompatActivity(R.layout.activity_search) {
     companion object {
-        lateinit var lastSearchDate: Date
+        var lastSearchDate: Date? = null
     }
 }
