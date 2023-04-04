@@ -180,12 +180,13 @@ class C {
 # ネストについて
 Kotlinのコードは、以下を確認します。
 * [ネストされたクラス](https://dogwood008.github.io/kotlin-web-site-ja/docs/reference/nested-classes.html)
-[ConstraintLayoutをネストすると激重になる](https://qiita.com/alt_yamamoto/items/3dd5ceaed850816e27da)
 
-xmlは以下を確認します。
+xmlのコードは、以下を確認します。
 * [ゆめみの Android の採用コーディング試験を公開しました ネストを浅くしているか](https://qiita.com/blendthink/items/aa70b8b3106fb4e3555f#%E3%83%8D%E3%82%B9%E3%83%88%E3%82%92%E6%B5%85%E3%81%8F%E3%81%97%E3%81%A6%E3%81%84%E3%82%8B%E3%81%8B)
 
 * [ConstraintLayout でレスポンシブ UI を作成する ](https://developer.android.com/training/constraint-layout?hl=ja)
+
+* [ConstraintLayoutをネストすると激重になる](https://qiita.com/alt_yamamoto/items/3dd5ceaed850816e27da)
 
 
 # 株式会社ゆめみ Android エンジニアコードチェック課題
