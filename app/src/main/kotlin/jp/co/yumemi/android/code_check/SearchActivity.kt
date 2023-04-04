@@ -11,7 +11,6 @@ import java.util.*
  * GitHub リポジトリを検索するためのアクティビティを実装するクラスです。
  */
 class SearchActivity : AppCompatActivity(R.layout.activity_search) {
-
     companion object {
         lateinit var lastSearchDate: Date
     }
