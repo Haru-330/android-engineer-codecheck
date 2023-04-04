@@ -21,7 +21,8 @@ class RepositoryDetailFragment : Fragment(R.layout.fragment_repository_detail) {
     private val args: RepositoryDetailFragmentArgs by navArgs()
 
     private var binding: FragmentRepositoryDetailBinding? = null
-    private val _binding get() = binding!!
+    private val _binding
+        get() = binding ?: throw java.lang.IllegalStateException("View binding is null")
 
     /**
      * onViewCreated メソッド

@@ -35,11 +35,11 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
         val binding = FragmentSearchBinding.bind(view)
 
-        val viewModel = GitHubSearchViewModel(context!!)
+        val viewModel = GitHubSearchViewModel(view.context)
 
-        val layoutManager = LinearLayoutManager(context!!)
+        val layoutManager = LinearLayoutManager(view.context)
         val dividerItemDecoration =
-            DividerItemDecoration(context!!, layoutManager.orientation)
+            DividerItemDecoration(view.context, layoutManager.orientation)
         val adapter = CustomAdapter(object : CustomAdapter.OnItemClickListener {
             override fun itemClick(item: item) {
                 gotoRepositoryFragment(item)
