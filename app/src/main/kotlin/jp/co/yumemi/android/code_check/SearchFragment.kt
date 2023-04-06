@@ -47,7 +47,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
         binding.searchInputText.setOnEditorActionListener { editText, action, _ ->
             if (action == EditorInfo.IME_ACTION_SEARCH) {
-                editText.text.toString().let {
+                editText?.text?.toString()?.let {
                     viewModel.searchGithubRepositories(it).apply {
                         adapter.submitList(this)
                     }
