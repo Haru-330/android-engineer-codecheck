@@ -2,4 +2,10 @@
     <string name="app_name">Android Engineer CodeCheck</string>
     <string name="searchInputText_hint">GitHub のリポジトリを検索できるよー</string>
     <string name="written_language">Written in %s</string>
+    <!--レポジトリーのデータ-->
+    <string name="repository_name">JetBrains/kotlin</string>
+    <string name="stars_count">38530 stars</string>
+    <string name="watchers_count">38530 watchers</string>
+    <string name="forks_count">4675 forks</string>
+    <string name="open_issues_count"></string>
 </resources>
