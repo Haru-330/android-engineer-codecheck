@@ -16,7 +16,7 @@ import kotlinx.parcelize.Parcelize
  */
 // TODO item を　Item　に変える
 @Parcelize
-data class item(
+data class Item(
     val name: String,
     val ownerIconUrl: String,
     val language: String,

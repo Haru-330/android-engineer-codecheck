@@ -36,7 +36,7 @@ class GitHubSearchViewModel(
      * 検索キーワードを用いて、GitHub APIを呼び出し、該当するリポジトリの情報を取得します。
      * 取得した情報をitemクラスのオブジェクトに変換し、リストに格納して返却します。
      */
-    fun searchGithubRepositories(inputText: String): List<item> = runBlocking {
+    fun searchGithubRepositories(inputText: String): List<Item> = runBlocking {
         val client = HttpClient(Android)
 
         return@runBlocking GlobalScope.async {
@@ -50,7 +50,7 @@ class GitHubSearchViewModel(
 
             val jsonItems = jsonBody.optJSONArray("items")
 
-            val items = mutableListOf<item>()
+            val items = mutableListOf<Item>()
 
             for (i in 0 until jsonItems.length()) {
                 val jsonItem = jsonItems.optJSONObject(i)
@@ -63,7 +63,7 @@ class GitHubSearchViewModel(
                 val openIssuesCount = jsonItem?.optLong("open_issues_count")
 
                 items.add(
-                    item(
+                    Item(
                         name = name ?: "",
                         ownerIconUrl = ownerIconUrl ?: "",
                         language = context.getString(R.string.written_language, language),
