@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
  */
 class CustomAdapter(
     private val itemClickListener: OnItemClickListener,
-) : ListAdapter<Item, CustomAdapter.ViewHolder>(diffUtil) {
+) : ListAdapter<RepositoryInfo, CustomAdapter.ViewHolder>(diffUtil) {
     /**
      * ViewHolderクラス
      * @param view RecyclerViewで使用されるView
@@ -28,7 +28,7 @@ class CustomAdapter(
      * itemがクリックされたときに呼び出されるメソッドを定義します。
      */
     interface OnItemClickListener {
-        fun itemClick(item: Item)
+        fun itemClick(item: RepositoryInfo)
     }
 
     /**

@@ -37,8 +37,8 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         val layoutManager = LinearLayoutManager(view.context)
         val dividerItemDecoration = DividerItemDecoration(view.context, layoutManager.orientation)
         val adapter = CustomAdapter(object : CustomAdapter.OnItemClickListener {
-            override fun itemClick(item: Item) {
-                gotoRepositoryDetailFragment(item)
+            override fun itemClick(repositoryInfo: RepositoryInfo) {
+                gotoRepositoryDetailFragment(repositoryInfo)
             }
         })
 
@@ -80,9 +80,9 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
      * @param Item タップされたアイテム
      * アイテムをタップした際に呼び出され、選択されたアイテムに対応するリポジトリの詳細を表示する RepositoryDetailFragment に遷移します。
      */
-    fun gotoRepositoryDetailFragment(item: Item) {
+    fun gotoRepositoryDetailFragment(repositoryInfo: RepositoryInfo) {
         val action =
-            SearchFragmentDirections.actionRepositoriesFragmentToRepositoryDetailFragment(item = item)
+            SearchFragmentDirections.actionRepositoriesFragmentToRepositoryDetailFragment(item = repositoryInfo)
         findNavController().navigate(action)
     }
 }
@@ -92,13 +92,19 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
  * @param Item
  * DiffUtilのItemCallbackクラスを継承して、二つのitemオブジェクトを比較し、アイテムが同じであるか、コンテンツが同じであるかを判定します。
  */
-val diffUtil = object : DiffUtil.ItemCallback<Item>() {
-    override fun areItemsTheSame(oldItem: Item, newItem: Item): Boolean {
-        return oldItem.name == newItem.name
+val diffUtil = object : DiffUtil.ItemCallback<RepositoryInfo>() {
+    override fun areItemsTheSame(
+        oldRepositoryInfo: RepositoryInfo,
+        newRepositoryInfo: RepositoryInfo
+    ): Boolean {
+        return oldRepositoryInfo.name == newRepositoryInfo.name
     }
 
-    override fun areContentsTheSame(oldItem: Item, newItem: Item): Boolean {
-        return oldItem == newItem
+    override fun areContentsTheSame(
+        oldRepositoryInfo: RepositoryInfo,
+        newRepositoryInfo: RepositoryInfo
+    ): Boolean {
+        return oldRepositoryInfo == newRepositoryInfo
     }
 
 }
