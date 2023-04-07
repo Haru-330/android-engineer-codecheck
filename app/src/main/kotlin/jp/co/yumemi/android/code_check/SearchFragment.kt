@@ -80,7 +80,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
      * @param Item タップされたアイテム
      * アイテムをタップした際に呼び出され、選択されたアイテムに対応するリポジトリの詳細を表示する RepositoryDetailFragment に遷移します。
      */
-    fun gotoRepositoryDetailFragment(repositoryInfo: RepositoryInfo) {
+    private fun gotoRepositoryDetailFragment(repositoryInfo: RepositoryInfo) {
         val action =
             SearchFragmentDirections.actionRepositoriesFragmentToRepositoryDetailFragment(item = repositoryInfo)
         findNavController().navigate(action)
@@ -94,15 +94,13 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
  */
 val diffUtil = object : DiffUtil.ItemCallback<RepositoryInfo>() {
     override fun areItemsTheSame(
-        oldRepositoryInfo: RepositoryInfo,
-        newRepositoryInfo: RepositoryInfo
+        oldRepositoryInfo: RepositoryInfo, newRepositoryInfo: RepositoryInfo
     ): Boolean {
         return oldRepositoryInfo.name == newRepositoryInfo.name
     }
 
     override fun areContentsTheSame(
-        oldRepositoryInfo: RepositoryInfo,
-        newRepositoryInfo: RepositoryInfo
+        oldRepositoryInfo: RepositoryInfo, newRepositoryInfo: RepositoryInfo
     ): Boolean {
         return oldRepositoryInfo == newRepositoryInfo
     }
