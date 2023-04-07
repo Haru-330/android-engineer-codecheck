@@ -39,7 +39,8 @@ class CustomAdapter(
      * 新しいViewHolderインスタンスを作成します。
      */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.layout_item, parent, false)
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.layout_repository_info, parent, false)
         return ViewHolder(view)
     }
 
