@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.*
@@ -46,14 +47,28 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
         binding.searchInputText.setOnEditorActionListener { editText, action, _ ->
             if (action == EditorInfo.IME_ACTION_SEARCH) {
-                editText?.text?.toString()?.let {
-                    viewModel.searchGithubRepositories(it).apply {
+                try {
+                    val searchQuery = binding.searchInputText.text.toString().trim()
+                    if (searchQuery.isEmpty()) {
+                        throw IllegalArgumentException("検索クエリが空です")
+                    }
+                    viewModel.searchGithubRepositories(searchQuery).apply {
                         adapter.submitList(this)
                     }
+                    binding.recyclerView.also {
+                        it.layoutManager = layoutManager
+                        it.addItemDecoration(dividerItemDecoration)
+                        it.adapter = adapter
+                    }
+                    return@setOnEditorActionListener true
+                } catch (e: IllegalArgumentException) {
+                    Toast.makeText(view.context, "検索クエリが空です。再度入力してください", Toast.LENGTH_SHORT).show()
+                } catch (e: Exception) {
+                    Toast.makeText(view.context, "入力が不正です。再度入力してください", Toast.LENGTH_SHORT).show()
                 }
-                return@setOnEditorActionListener true
+                return@setOnEditorActionListener false
             }
-            return@setOnEditorActionListener false
+            false
         }
 
         binding.recyclerView.also {
