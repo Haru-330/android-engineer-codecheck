@@ -1,3 +1,26 @@
+# 今回終了したタスク
+## 初級
+### ソースコードの可読性の向上
+* 命名規則
+* ネスト
+* インデント
+* スペースや改行
+* コメントの適切性
+### ソースコードの安全性の向上
+* 非null表明演算子
+* 強制ダウンキャスト
+* 不必要なlateinit修飾子
+* 想定外のnullの握り潰し
+### バグを修正
+* レイアウトエラー
+* メモリリーク
+* パースエラー
+* 例外の処理漏れ
+* クラッシュ
+
+### Fat Fragment の回避
+* Fat Fragment の回避
+
 # コメントの書き方
 簡易的なKDocのような感じで書きます。
 
@@ -177,17 +200,9 @@ class C {
 > 1. Github上で、やりたいことを記載したIssueを立てる。(issue番号は#1と仮定)発行されたIssue番号を使い、feature/#1replace_to_hamburger_menuというブランチを作成。
 > 2. 開発進める。開発完了したらdevelopブランチにマージコミット。
 > 3.  この際、close #12などとコミットメッセージに記述すると、自動的にIssueが閉じられるので、覚えておきましょう。
-# ネストについて
-Kotlinのコードは、以下を確認します。
-* [ネストされたクラス](https://dogwood008.github.io/kotlin-web-site-ja/docs/reference/nested-classes.html)
 
-xmlのコードは、以下を確認します。
-* [ゆめみの Android の採用コーディング試験を公開しました ネストを浅くしているか](https://qiita.com/blendthink/items/aa70b8b3106fb4e3555f#%E3%83%8D%E3%82%B9%E3%83%88%E3%82%92%E6%B5%85%E3%81%8F%E3%81%97%E3%81%A6%E3%81%84%E3%82%8B%E3%81%8B)
-
-* [ConstraintLayout でレスポンシブ UI を作成する ](https://developer.android.com/training/constraint-layout?hl=ja)
-
-* [ConstraintLayoutをネストすると激重になる](https://qiita.com/alt_yamamoto/items/3dd5ceaed850816e27da)
-
+<details>
+<summary>Duplicate先の原文</summary>
 
 # 株式会社ゆめみ Android エンジニアコードチェック課題
 
@@ -237,3 +252,5 @@ Issues を確認した上、本プロジェクトを [**Duplicate** してくだ
 ## 参考記事
 
 提出された課題の評価ポイントに関しては、[こちらの記事](https://qiita.com/blendthink/items/aa70b8b3106fb4e3555f)に詳しく書かれてありますので、ぜひご覧ください。
+
+</details>
