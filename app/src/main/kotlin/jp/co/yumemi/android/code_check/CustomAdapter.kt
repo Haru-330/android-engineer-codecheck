@@ -9,12 +9,12 @@ import androidx.recyclerview.widget.RecyclerView
 
 /**
  * CustomAdapter クラス
- * @param Item
- * RecyclerViewのListAdapterクラスを継承して、itemのリストを表示するためのカスタムアダプターです。
- * アイテムがクリックされたときに、OnItemClickListenerインターフェースのitemClickメソッドを呼び出します。
+ * @param repositoryInfo
+ * RecyclerViewのListAdapterクラスを継承して、repositoryInfoのリストを表示するためのカスタムアダプターです。
+ * アイテムがクリックされたときに、OnrepositoryInfoClickListenerインターフェースのrepositoryInfoClickメソッドを呼び出します。
  */
 class CustomAdapter(
-    private val itemClickListener: OnItemClickListener,
+    private val itemClickListener: OnrepositoryInfoClickListener,
 ) : ListAdapter<RepositoryInfo, CustomAdapter.ViewHolder>(diffUtil) {
     /**
      * ViewHolderクラス
@@ -24,11 +24,11 @@ class CustomAdapter(
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
     /**
-     * OnItemClickListenerインターフェース
-     * itemがクリックされたときに呼び出されるメソッドを定義します。
+     * OnrepositoryInfoClickListenerインターフェース
+     * repositoryInfoがクリックされたときに呼び出されるメソッドを定義します。
      */
-    interface OnItemClickListener {
-        fun itemClick(item: RepositoryInfo)
+    interface OnrepositoryInfoClickListener {
+        fun repositoryInfoClick(repositoryInfo: RepositoryInfo)
     }
 
     /**
@@ -51,11 +51,11 @@ class CustomAdapter(
      * アイテムのデータをViewHolderのビューにバインドします。
      */
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = getItem(position)
-        holder.itemView.findViewById<TextView>(R.id.repositoryNameView).text = item.name
+        val repositoryInfo = getItem(position)
+        holder.itemView.findViewById<TextView>(R.id.repositoryNameView).text = repositoryInfo.name
 
         holder.itemView.setOnClickListener {
-            itemClickListener.itemClick(item)
+            itemClickListener.repositoryInfoClick(repositoryInfo)
         }
     }
 }

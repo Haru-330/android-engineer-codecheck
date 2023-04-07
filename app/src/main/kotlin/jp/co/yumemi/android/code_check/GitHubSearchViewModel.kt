@@ -20,7 +20,7 @@ import java.util.*
  * @param context Applicationのコンテキスト
  * GitHubリポジトリを検索するためのViewModelクラスです。
  * 検索キーワードを用いて、GitHub APIを呼び出し、該当するリポジトリの情報を取得します。
- * 取得した情報をitemクラスのオブジェクトに変換し、リストに格納して返却します。
+ * 取得した情報をrepositoryInfoクラスのオブジェクトに変換し、リストに格納して返却します。
  */
 class GitHubSearchViewModel(
     val context: Context
@@ -67,19 +67,19 @@ class GitHubSearchViewModel(
     suspend fun parseGitHubRepositories(response: HttpResponse): List<RepositoryInfo> {
         val jsonBody = JSONObject(response?.receive<String>() ?: "")
 
-        val jsonItems = jsonBody.optJSONArray("items")
+        val jsonrepositoryInfos = jsonBody.optJSONArray("repositoryInfos")
 
         val repositoryInfos = mutableListOf<RepositoryInfo>()
 
-        for (i in 0 until jsonItems.length()) {
-            val jsonItem = jsonItems.optJSONObject(i)
-            val name = jsonItem?.optString("full_name")
-            val ownerIconUrl = jsonItem?.optJSONObject("owner")?.optString("avatar_url")
-            val language = jsonItem?.optString("language")
-            val stargazersCount = jsonItem?.optLong("stargazers_count")
-            val watchersCount = jsonItem?.optLong("watchers_count")
-            val forksCount = jsonItem?.optLong("forks_count")
-            val openIssuesCount = jsonItem?.optLong("open_issues_count")
+        for (i in 0 until jsonrepositoryInfos.length()) {
+            val jsonrepositoryInfo = jsonrepositoryInfos.optJSONObject(i)
+            val name = jsonrepositoryInfo?.optString("full_name")
+            val ownerIconUrl = jsonrepositoryInfo?.optJSONObject("owner")?.optString("avatar_url")
+            val language = jsonrepositoryInfo?.optString("language")
+            val stargazersCount = jsonrepositoryInfo?.optLong("stargazers_count")
+            val watchersCount = jsonrepositoryInfo?.optLong("watchers_count")
+            val forksCount = jsonrepositoryInfo?.optLong("forks_count")
+            val openIssuesCount = jsonrepositoryInfo?.optLong("open_issues_count")
 
             repositoryInfos.add(
                 RepositoryInfo(
