@@ -4,11 +4,8 @@
 package jp.co.yumemi.android.code_check
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
-import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -40,8 +37,8 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         val layoutManager = LinearLayoutManager(view.context)
         val dividerItemDecoration = DividerItemDecoration(view.context, layoutManager.orientation)
         val adapter = CustomAdapter(object : CustomAdapter.OnItemClickListener {
-            override fun itemClick(item: Item) {
-                gotoRepositoryDetailFragment(item)
+            override fun itemClick(repositoryInfo: RepositoryInfo) {
+                gotoRepositoryDetailFragment(repositoryInfo)
             }
         })
 
@@ -71,11 +68,25 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             false
         }
 
-        binding.recyclerView.also {
-            it.layoutManager = layoutManager
-            it.addItemDecoration(dividerItemDecoration)
-            it.adapter = adapter
-        }
+        initRecyclerView(view, adapter)
+    }
+
+    /**
+     * initRecyclerViewメソッド
+     * @param view RecyclerViewを含むViewオブジェクト
+     * @param adapter RecyclerViewにセットするアダプター
+     * @return 初期化されたRecyclerViewオブジェクト
+     * RecyclerViewを初期化する関数です。
+     * LinearLayoutManagerとDividerItemDecorationが設定され、アダプターが設定されます。
+     */
+    private fun initRecyclerView(view: View, adapter: CustomAdapter): RecyclerView {
+        val layoutManager = LinearLayoutManager(view.context)
+        val dividerItemDecoration = DividerItemDecoration(view.context, layoutManager.orientation)
+        val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
+        recyclerView.layoutManager = layoutManager
+        recyclerView.addItemDecoration(dividerItemDecoration)
+        recyclerView.adapter = adapter
+        return recyclerView
     }
 
     /**
@@ -83,9 +94,9 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
      * @param Item タップされたアイテム
      * アイテムをタップした際に呼び出され、選択されたアイテムに対応するリポジトリの詳細を表示する RepositoryDetailFragment に遷移します。
      */
-    fun gotoRepositoryDetailFragment(item: Item) {
+    private fun gotoRepositoryDetailFragment(repositoryInfo: RepositoryInfo) {
         val action =
-            SearchFragmentDirections.actionRepositoriesFragmentToRepositoryDetailFragment(item = item)
+            SearchFragmentDirections.actionRepositoriesFragmentToRepositoryDetailFragment(item = repositoryInfo)
         findNavController().navigate(action)
     }
 }
@@ -95,65 +106,17 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
  * @param Item
  * DiffUtilのItemCallbackクラスを継承して、二つのitemオブジェクトを比較し、アイテムが同じであるか、コンテンツが同じであるかを判定します。
  */
-val diffUtil = object : DiffUtil.ItemCallback<Item>() {
-    override fun areItemsTheSame(oldItem: Item, newItem: Item): Boolean {
-        return oldItem.name == newItem.name
+val diffUtil = object : DiffUtil.ItemCallback<RepositoryInfo>() {
+    override fun areItemsTheSame(
+        oldRepositoryInfo: RepositoryInfo, newRepositoryInfo: RepositoryInfo
+    ): Boolean {
+        return oldRepositoryInfo.name == newRepositoryInfo.name
     }
 
-    override fun areContentsTheSame(oldItem: Item, newItem: Item): Boolean {
-        return oldItem == newItem
+    override fun areContentsTheSame(
+        oldRepositoryInfo: RepositoryInfo, newRepositoryInfo: RepositoryInfo
+    ): Boolean {
+        return oldRepositoryInfo == newRepositoryInfo
     }
 
-}
-
-/**
- * CustomAdapter クラス
- * @param Item
- * RecyclerViewのListAdapterクラスを継承して、itemのリストを表示するためのカスタムアダプターです。
- * アイテムがクリックされたときに、OnItemClickListenerインターフェースのitemClickメソッドを呼び出します。
- */
-class CustomAdapter(
-    private val itemClickListener: OnItemClickListener,
-) : ListAdapter<Item, CustomAdapter.ViewHolder>(diffUtil) {
-    /**
-     * ViewHolderクラス
-     * @param view RecyclerViewで使用されるView
-     * カスタムアダプターのビューホルダーです。
-     */
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view)
-
-    /**
-     * OnItemClickListenerインターフェース
-     * itemがクリックされたときに呼び出されるメソッドを定義します。
-     */
-    interface OnItemClickListener {
-        fun itemClick(item: Item)
-    }
-
-    /**
-     * onCreateViewHolderメソッド
-     * @param parent RecyclerViewの親ViewGroup
-     * @param viewType ビュータイプ
-     * @return ViewHolder
-     * 新しいViewHolderインスタンスを作成します。
-     */
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.layout_item, parent, false)
-        return ViewHolder(view)
-    }
-
-    /**
-     * onBindViewHolderメソッド
-     * @param holder RecyclerViewのViewHolder
-     * @param position リストアイテムのポジション
-     * アイテムのデータをViewHolderのビューにバインドします。
-     */
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = getItem(position)
-        holder.itemView.findViewById<TextView>(R.id.repositoryNameView).text = item.name
-
-        holder.itemView.setOnClickListener {
-            itemClickListener.itemClick(item)
-        }
-    }
 }
