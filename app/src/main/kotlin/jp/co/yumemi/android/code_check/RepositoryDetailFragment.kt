@@ -30,22 +30,36 @@ class RepositoryDetailFragment : Fragment(R.layout.fragment_repository_detail) {
      */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        try {
+            if (lastSearchDate == null) {
+                Log.d("検索した日時", "検索されていません")
+            } else {
+                Log.d("検索した日時", lastSearchDate.toString())
+            }
+            binding = FragmentRepositoryDetailBinding.bind(view)
 
-        if (lastSearchDate == null) {
-            Log.d("検索した日時", "検索されていません")
-        } else {
-            Log.d("検索した日時", lastSearchDate.toString())
+            var item = args.item ?: throw java.lang.IllegalStateException("Item is null")
+
+            _binding.ownerIconView.load(item.ownerIconUrl);
+            _binding.nameView.text = item.name;
+            _binding.languageView.text = item.language;
+            _binding.starsView.text = "${item.stargazersCount} stars";
+            _binding.watchersView.text = "${item.watchersCount} watchers";
+            _binding.forksView.text = "${item.forksCount} forks";
+            _binding.openIssuesView.text = "${item.openIssuesCount} open issues";
+        } catch (e: NullPointerException) {
+            Log.e("RepositoryDetailFragment", "Failed to set up UI elements", e)
+        } catch (e: RuntimeException) {
+            Log.e("RepositoryDetailFragment", "Failed to set up UI elements", e)
         }
-        binding = FragmentRepositoryDetailBinding.bind(view)
+    }
 
-        var item = args.item ?: throw java.lang.IllegalStateException("Item is null")
-
-        _binding.ownerIconView.load(item.ownerIconUrl);
-        _binding.nameView.text = item.name;
-        _binding.languageView.text = item.language;
-        _binding.starsView.text = "${item.stargazersCount} stars";
-        _binding.watchersView.text = "${item.watchersCount} watchers";
-        _binding.forksView.text = "${item.forksCount} forks";
-        _binding.openIssuesView.text = "${item.openIssuesCount} open issues";
+    override fun onDestroy() {
+        super.onDestroy()
+        try {
+            binding = null
+        } catch (e: RuntimeException) {
+            Log.e("RepositoryDetailFragment", "Failed to release binding", e)
+        }
     }
 }
