@@ -14,7 +14,6 @@ import kotlinx.parcelize.Parcelize
  * @param openIssuesCount オープンイシュー数
  * Parcelableインターフェースを実装した、GitHubリポジトリの情報を格納するデータクラスです。
  */
-// TODO item を　Item　に変える
 @Parcelize
 data class RepositoryInfo(
     val name: String,
