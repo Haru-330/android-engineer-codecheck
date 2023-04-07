@@ -37,7 +37,8 @@ class RepositoryDetailFragment : Fragment(R.layout.fragment_repository_detail) {
             }
             binding = FragmentRepositoryDetailBinding.bind(view)
 
-            var repositoryInfo = args.item ?: throw java.lang.IllegalStateException("Item is null")
+            var repositoryInfo = args.repositoryInfo
+                ?: throw java.lang.IllegalStateException("repositoryInfo is null")
             RepositoryDetailViewModel().updateDetailUI(repositoryInfo, _binding)
         } catch (e: NullPointerException) {
             Log.e("RepositoryDetailFragment", "Failed to set up UI elements", e)

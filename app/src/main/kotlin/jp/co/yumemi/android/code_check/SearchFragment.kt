@@ -35,9 +35,10 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         val viewModel = GitHubSearchViewModel(view.context)
 
         val layoutManager = LinearLayoutManager(view.context)
-        val dividerItemDecoration = DividerItemDecoration(view.context, layoutManager.orientation)
-        val adapter = CustomAdapter(object : CustomAdapter.OnItemClickListener {
-            override fun itemClick(repositoryInfo: RepositoryInfo) {
+        val dividerrepositoryInfoDecoration =
+            DividerItemDecoration(view.context, layoutManager.orientation)
+        val adapter = CustomAdapter(object : CustomAdapter.OnrepositoryInfoClickListener {
+            override fun repositoryInfoClick(repositoryInfo: RepositoryInfo) {
                 gotoRepositoryDetailFragment(repositoryInfo)
             }
         })
@@ -54,7 +55,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                     }
                     binding.recyclerView.also {
                         it.layoutManager = layoutManager
-                        it.addItemDecoration(dividerItemDecoration)
+                        it.addItemDecoration(dividerrepositoryInfoDecoration)
                         it.adapter = adapter
                     }
                     return@setOnEditorActionListener true
@@ -77,34 +78,36 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
      * @param adapter RecyclerViewにセットするアダプター
      * @return 初期化されたRecyclerViewオブジェクト
      * RecyclerViewを初期化する関数です。
-     * LinearLayoutManagerとDividerItemDecorationが設定され、アダプターが設定されます。
+     * LinearLayoutManagerとDividerrepositoryInfoDecorationが設定され、アダプターが設定されます。
      */
     private fun initRecyclerView(view: View, adapter: CustomAdapter): RecyclerView {
         val layoutManager = LinearLayoutManager(view.context)
-        val dividerItemDecoration = DividerItemDecoration(view.context, layoutManager.orientation)
+        val dividerrepositoryInfoDecoration =
+            DividerItemDecoration(view.context, layoutManager.orientation)
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
         recyclerView.layoutManager = layoutManager
-        recyclerView.addItemDecoration(dividerItemDecoration)
+        recyclerView.addItemDecoration(dividerrepositoryInfoDecoration)
         recyclerView.adapter = adapter
         return recyclerView
     }
 
     /**
      * gotoRepositoryDetailFragment メソッド
-     * @param Item タップされたアイテム
+     * @param repositoryInfo タップされたアイテム
      * アイテムをタップした際に呼び出され、選択されたアイテムに対応するリポジトリの詳細を表示する RepositoryDetailFragment に遷移します。
      */
     private fun gotoRepositoryDetailFragment(repositoryInfo: RepositoryInfo) {
-        val action =
-            SearchFragmentDirections.actionRepositoriesFragmentToRepositoryDetailFragment(item = repositoryInfo)
+        val action = SearchFragmentDirections.actionRepositoriesFragmentToRepositoryDetailFragment(
+            repositoryInfo = repositoryInfo
+        )
         findNavController().navigate(action)
     }
 }
 
 /**
  * diffUtil
- * @param Item
- * DiffUtilのItemCallbackクラスを継承して、二つのitemオブジェクトを比較し、アイテムが同じであるか、コンテンツが同じであるかを判定します。
+ * @param repositoryInfo
+ * DiffUtilのrepositoryInfoCallbackクラスを継承して、二つのrepositoryInfoオブジェクトを比較し、アイテムが同じであるか、コンテンツが同じであるかを判定します。
  */
 val diffUtil = object : DiffUtil.ItemCallback<RepositoryInfo>() {
     override fun areItemsTheSame(
