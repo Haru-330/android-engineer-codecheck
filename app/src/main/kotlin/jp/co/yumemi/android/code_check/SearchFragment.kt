@@ -40,7 +40,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         val layoutManager = LinearLayoutManager(view.context)
         val dividerItemDecoration = DividerItemDecoration(view.context, layoutManager.orientation)
         val adapter = CustomAdapter(object : CustomAdapter.OnItemClickListener {
-            override fun itemClick(item: item) {
+            override fun itemClick(item: Item) {
                 gotoRepositoryFragment(item)
             }
         })
@@ -66,10 +66,10 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
     /**
      * gotoRepositoryFragment メソッド
-     * @param item タップされたアイテム
+     * @param Item タップされたアイテム
      * アイテムをタップした際に呼び出され、選択されたアイテムに対応するリポジトリの詳細を表示する RepositoryDetailFragment に遷移します。
      */
-    fun gotoRepositoryFragment(item: item) {
+    fun gotoRepositoryFragment(item: Item) {
         val action =
             SearchFragmentDirections.actionRepositoriesFragmentToRepositoryFragment(item = item)
         findNavController().navigate(action)
@@ -78,15 +78,15 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
 /**
  * diffUtil
- * @param item
+ * @param Item
  * DiffUtilのItemCallbackクラスを継承して、二つのitemオブジェクトを比較し、アイテムが同じであるか、コンテンツが同じであるかを判定します。
  */
-val diffUtil = object : DiffUtil.ItemCallback<item>() {
-    override fun areItemsTheSame(oldItem: item, newItem: item): Boolean {
+val diffUtil = object : DiffUtil.ItemCallback<Item>() {
+    override fun areItemsTheSame(oldItem: Item, newItem: Item): Boolean {
         return oldItem.name == newItem.name
     }
 
-    override fun areContentsTheSame(oldItem: item, newItem: item): Boolean {
+    override fun areContentsTheSame(oldItem: Item, newItem: Item): Boolean {
         return oldItem == newItem
     }
 
@@ -94,13 +94,13 @@ val diffUtil = object : DiffUtil.ItemCallback<item>() {
 
 /**
  * CustomAdapter クラス
- * @param item
+ * @param Item
  * RecyclerViewのListAdapterクラスを継承して、itemのリストを表示するためのカスタムアダプターです。
  * アイテムがクリックされたときに、OnItemClickListenerインターフェースのitemClickメソッドを呼び出します。
  */
 class CustomAdapter(
     private val itemClickListener: OnItemClickListener,
-) : ListAdapter<item, CustomAdapter.ViewHolder>(diffUtil) {
+) : ListAdapter<Item, CustomAdapter.ViewHolder>(diffUtil) {
     /**
      * ViewHolderクラス
      * @param view RecyclerViewで使用されるView
@@ -113,7 +113,7 @@ class CustomAdapter(
      * itemがクリックされたときに呼び出されるメソッドを定義します。
      */
     interface OnItemClickListener {
-        fun itemClick(item: item)
+        fun itemClick(item: Item)
     }
 
     /**

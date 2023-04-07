@@ -30,7 +30,7 @@ class RepositoryDetailFragment : Fragment(R.layout.fragment_repository_detail) {
      */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        
+
         if (lastSearchDate == null) {
             Log.d("検索した日時", "検索されていません")
         } else {
@@ -38,7 +38,7 @@ class RepositoryDetailFragment : Fragment(R.layout.fragment_repository_detail) {
         }
         binding = FragmentRepositoryDetailBinding.bind(view)
 
-        var item = args.item ?: throw java.lang.IllegalStateException("item is null")
+        var item = args.item ?: throw java.lang.IllegalStateException("Item is null")
 
         _binding.ownerIconView.load(item.ownerIconUrl);
         _binding.nameView.text = item.name;
