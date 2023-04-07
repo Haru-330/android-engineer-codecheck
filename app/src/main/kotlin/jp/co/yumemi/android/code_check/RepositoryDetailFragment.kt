@@ -8,7 +8,6 @@ import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
-import coil.load
 import jp.co.yumemi.android.code_check.SearchActivity.Companion.lastSearchDate
 import jp.co.yumemi.android.code_check.databinding.FragmentRepositoryDetailBinding
 
@@ -38,15 +37,8 @@ class RepositoryDetailFragment : Fragment(R.layout.fragment_repository_detail) {
             }
             binding = FragmentRepositoryDetailBinding.bind(view)
 
-            var item = args.item ?: throw java.lang.IllegalStateException("Item is null")
-
-            _binding.ownerIconView.load(item.ownerIconUrl);
-            _binding.nameView.text = item.name;
-            _binding.languageView.text = item.language;
-            _binding.starsView.text = "${item.stargazersCount} stars";
-            _binding.watchersView.text = "${item.watchersCount} watchers";
-            _binding.forksView.text = "${item.forksCount} forks";
-            _binding.openIssuesView.text = "${item.openIssuesCount} open issues";
+            var repositoryInfo = args.item ?: throw java.lang.IllegalStateException("Item is null")
+            RepositoryDetailViewModel().updateDetailUI(repositoryInfo, _binding)
         } catch (e: NullPointerException) {
             Log.e("RepositoryDetailFragment", "Failed to set up UI elements", e)
         } catch (e: RuntimeException) {
