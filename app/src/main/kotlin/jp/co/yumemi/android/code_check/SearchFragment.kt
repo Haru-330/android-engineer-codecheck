@@ -68,11 +68,25 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             false
         }
 
-        binding.recyclerView.also {
-            it.layoutManager = layoutManager
-            it.addItemDecoration(dividerItemDecoration)
-            it.adapter = adapter
-        }
+        initRecyclerView(view, adapter)
+    }
+
+    /**
+     * initRecyclerViewメソッド
+     * @param view RecyclerViewを含むViewオブジェクト
+     * @param adapter RecyclerViewにセットするアダプター
+     * @return 初期化されたRecyclerViewオブジェクト
+     * RecyclerViewを初期化する関数です。
+     * LinearLayoutManagerとDividerItemDecorationが設定され、アダプターが設定されます。
+     */
+    private fun initRecyclerView(view: View, adapter: CustomAdapter): RecyclerView {
+        val layoutManager = LinearLayoutManager(view.context)
+        val dividerItemDecoration = DividerItemDecoration(view.context, layoutManager.orientation)
+        val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
+        recyclerView.layoutManager = layoutManager
+        recyclerView.addItemDecoration(dividerItemDecoration)
+        recyclerView.adapter = adapter
+        return recyclerView
     }
 
     /**
