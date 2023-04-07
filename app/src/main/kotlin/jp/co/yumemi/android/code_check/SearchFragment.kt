@@ -20,7 +20,6 @@ import jp.co.yumemi.android.code_check.databinding.FragmentSearchBinding
  * 検索欄に検索ワードを入力すると、RecyclerView に検索結果が表示されます。
  * リスト内のアイテムをタップすると、選択されたアイテムに対応するリポジトリの詳細を表示する RepositoryDetailFragment に遷移します。
  */
-// TODO RepositoryFragment　を　RepositoryDetailFragment　に名前を変える
 class SearchFragment : Fragment(R.layout.fragment_search) {
     /**
      * onViewCreated メソッド
@@ -41,7 +40,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         val dividerItemDecoration = DividerItemDecoration(view.context, layoutManager.orientation)
         val adapter = CustomAdapter(object : CustomAdapter.OnItemClickListener {
             override fun itemClick(item: Item) {
-                gotoRepositoryFragment(item)
+                gotoRepositoryDetailFragment(item)
             }
         })
 
@@ -65,13 +64,13 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
     }
 
     /**
-     * gotoRepositoryFragment メソッド
+     * gotoRepositoryDetailFragment メソッド
      * @param Item タップされたアイテム
      * アイテムをタップした際に呼び出され、選択されたアイテムに対応するリポジトリの詳細を表示する RepositoryDetailFragment に遷移します。
      */
-    fun gotoRepositoryFragment(item: Item) {
+    fun gotoRepositoryDetailFragment(item: Item) {
         val action =
-            SearchFragmentDirections.actionRepositoriesFragmentToRepositoryFragment(item = item)
+            SearchFragmentDirections.actionRepositoriesFragmentToRepositoryDetailFragment(item = item)
         findNavController().navigate(action)
     }
 }
